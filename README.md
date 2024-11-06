@@ -1,6 +1,6 @@
 # ohmygod - CLI Tool Powered by Gods
 
-ohmygod is an extension of `Console` class from [rich](<(https://github.com/Textualize/rich)>) library. If your program does not need a cute guardian god, you may want to use the original library instead.
+`OhMyGod` is an extension of `Console` class from [rich](https://github.com/Textualize/rich) library. If your program does not need a cute guardian god — for reasons only gods know — you may want to use the original library instead.
 
 https://github.com/user-attachments/assets/9861c2c6-6bb2-4bc6-b575-e7c5dbbcd72b
 
