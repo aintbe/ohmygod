@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Dict, List, Self
+from typing import Dict, List
 from colorama import Fore
 
 
@@ -43,7 +43,7 @@ class _Message(str):
         raise TypeError("Use 'from_str' to create a Message instance.")
 
     @classmethod
-    def from_str(cls, value: str) -> Self:
+    def from_str(cls, value: str) -> "_Message":
         """Factory method to validate and create a Message instance.
         
         Parameters
@@ -64,12 +64,12 @@ class _Message(str):
 
 
     @classmethod
-    def __instance(cls, value: str) -> Self:
+    def __instance(cls, value: str):
         """Internal method for creating a Message instance without validation."""
         return super().__new__(cls, value)
 
         
-    def format(self, **kwargs) -> Self:
+    def format(self, **kwargs):
         """Format a message with the given placeholders.
         
         Parameters
@@ -85,12 +85,12 @@ class _Message(str):
         return _Message.__instance(self.format_map(formatter))
     
 
-    def clean(self) -> Self:
+    def clean(self):
         """Remove placeholders from the message."""
         return self.format(base_color="", point_color="", animation="")
     
 
-    def color(self, point: Color, base: Color = Color.DEFAULT) -> Self:
+    def color(self, point: Color, base: Color = Color.DEFAULT):
         """Color a message with the point and base colors."""
         point_color = _COLOR_MAP.get(point)
         base_color = _COLOR_MAP.get(base)
@@ -100,6 +100,6 @@ class _Message(str):
         return self.format(base_color=base_color, point_color=point_color)
 
 
-    def animate(self, animations: List[str]) -> List[Self]:
+    def animate(self, animations: List[str]):
         """Apply a series of animation to a message."""
         return [self.format(animation=animation) for animation in animations]

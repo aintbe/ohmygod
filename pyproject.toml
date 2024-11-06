@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ohmygod"
-version = "0.1.4"
+version = "0.1.5"
 description = "Rich CLI tool powered by Buddha"
 authors = ["Sori Lim <sori@chartmetric.com>"]
 license = "MIT"
