@@ -1,5 +1,8 @@
 # ohmygod - CLI Tool Powered by Buddha
 
+https://github.com/user-attachments/assets/407e026f-db8d-45d8-8fa4-bc0e71816321
+
+
 ### Set up with Poetry
 
 If poetry is not installed, follow [this installation steps](https://python-poetry.org/docs/).
