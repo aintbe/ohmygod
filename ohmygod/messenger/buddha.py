@@ -1,5 +1,7 @@
 from rich.text import Text
-from .utils import Color, _Message
+
+from .messenger import _Messenger
+from ..utils import Color, _Message
 
 
 _BLESSING = _Message.from_str(r"""
@@ -71,10 +73,40 @@ _ERROR_ANIMATION = _Message.from_str("""ALL within the palm of my hand
 _ERROR = _ERROR_TEMPLATE.clean() + _ERROR_ANIMATION
 
 
-class Message:
-    """Importable messages for the OhMyGod"""
+class Buddha(_Messenger):
+    @property
+    def BLESSING(self):
+        return _BLESSING
     
-    BLESSING = Text(_BLESSING)
-    PRAYER = Text(_PRAYER)
-    HURRAY = Text(_HURRAY)
-    ERROR = Text(_ERROR)
+    @property
+    def PRAYER_ANIMATED(self):
+        return _PRAYER_ANIMATED
+    
+    @property
+    def HURRAY_ANIMATED(self):
+        return _HURRAY_ANIMATED
+    
+    @property
+    def ERROR_COLORED(self):
+        return _ERROR_COLORED
+    
+    @property
+    def ERROR_ANIMATION(self):
+        return _ERROR_ANIMATION
+    
+    class Quotes(_Messenger.Quotes):
+        @property
+        def BLESSING(self):
+            return Text(_BLESSING)
+        
+        @property
+        def PRAYER(self):
+            return Text(_PRAYER)
+        
+        @property
+        def HURRAY(self):
+            return Text(_HURRAY)
+        
+        @property
+        def ERROR(self):
+            return Text(_ERROR)

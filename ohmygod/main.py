@@ -6,19 +6,27 @@ from threading import Thread, Event
 import time
 from queue import Queue
 
-from . import message as Message
+from .messenger.buddha import Buddha
+from .messenger.messenger import _Messenger as Messenger
 
 
 class OhMyGod(Console):
     """Console interface powered by Buddha"""
-    def __init__(self):
+    def __init__(self, messenger_cls: type[Messenger] = Buddha):
         super().__init__()
+        self.messenger = messenger_cls()
         self.bless()
 
 
     def bless(self):
         """Give a blessing to the program"""
-        self.print(Text(Message._BLESSING))
+        self.print(Text(self.messenger.BLESSING))
+
+    
+    @property
+    def quotes(self):
+        """Retrieve importable messages for the messenger"""
+        return self.messenger.quotes
 
     
     def protect(self, message: str = ""):
@@ -32,7 +40,7 @@ class OhMyGod(Console):
             with Live(auto_refresh=False, console=self) as live:
                 state = 0
                 while not signal.is_set():
-                    prayer = Text(Message._PRAYER_ANIMATED[state % 2])
+                    prayer = Text(self.messenger.PRAYER_ANIMATED[state % 2])
                     dots = "." * (state % 4)
 
                     live.update(prayer + message + dots)
@@ -71,7 +79,7 @@ class OhMyGod(Console):
         """Print a success message to the screen"""
         with Live(auto_refresh=False, console=self) as live:
             for i in range(3):
-                live.update(Text(Message._HURRAY_ANIMATED[i % 2] + message))
+                live.update(Text(self.messenger.HURRAY_ANIMATED[i % 2] + message))
                 live.refresh()
                 if i < 2:
                     time.sleep(0.4 + 0.3 * i)
@@ -79,10 +87,10 @@ class OhMyGod(Console):
 
     def error(self, message: str = ""):
         """Print an error message to the screen"""
-        self.print(Text(Message._ERROR_COLORED), end="")
+        self.print(Text(self.messenger.ERROR_COLORED), end="")
 
         # Print characters in the error message one by one
-        for char in Message._ERROR_ANIMATION:
+        for char in self.messenger.ERROR_ANIMATION:
             self.print(Text(char, style="red"), end="")
             time.sleep(0.1)
 

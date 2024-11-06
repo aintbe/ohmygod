@@ -1,7 +1,7 @@
-from ohmygod import OhMyGod, HolyMessage
+from ohmygod import OhMyGod, Buddha
 import time
 
-omg = OhMyGod()
+omg = OhMyGod(Buddha)
 
 @omg.protect("> Praying for a long running process")
 def long_running_process(fail: bool):
@@ -23,3 +23,6 @@ except Exception as e:
     # Show an error message if the process fails
     omg.clear()
     omg.error(str(e))
+
+# Print using messages defined by the package
+omg.print(omg.quotes.BLESSING)

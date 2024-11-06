@@ -1,10 +1,9 @@
 """OH MY GOD package built upon rich console interface"""
 
-__version__ = "0.1.5"
-
+__version__ = "0.2.0"
 
 from .main import OhMyGod
-from .message import Message as HolyMessage
-from .utils import Color as HolyColor
+from .utils import Color
+from .messenger.buddha import Buddha
 
-__all__ = ["OhMyGod", "HolyMessage", "HolyColor"]
+__all__ = ["OhMyGod", "Color", "Buddha"]
