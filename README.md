@@ -1,6 +1,6 @@
 # ohmygod - CLI Tool Powered by Buddha
 
-https://github.com/user-attachments/assets/407e026f-db8d-45d8-8fa4-bc0e71816321
+https://github.com/user-attachments/assets/9861c2c6-6bb2-4bc6-b575-e7c5dbbcd72b
 
 
 ### Set up with Poetry
