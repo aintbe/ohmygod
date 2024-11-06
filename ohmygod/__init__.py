@@ -1,6 +1,6 @@
 """OH MY GOD package built upon rich console interface"""
 
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 
 
 from .main import OhMyGod
