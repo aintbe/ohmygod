@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "ohmygod"
+version = "0.1.2"
+description = "Rich CLI tool powered by Buddha"
+authors = ["Sori Lim <sori@chartmetric.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+colorama = "^0.4"
+rich = "^13.9.0"
+readchar = "^4.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

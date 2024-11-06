@@ -1,15 +1,23 @@
-# ohmygod - Console Powered by Buddha
+# ohmygod - CLI Tool Powered by Buddha
+
+### Set up with Poetry
+
+If poetry is not installed, follow [this installation steps](https://python-poetry.org/docs/).
 
 ```bash
-> python3 -m venv env
-> source ./env/bin/activate
-> python3 -m pip install -r requirements.lock
+> poetry install --no-dev
+> poetry shell
 > python3 -m example
 ```
 
-### How to Deploy to PyPI
+### Set up with PIP
 
 ```bash
-> python3 setup.py sdist bdist_wheel
-> python3 -m twine upload dist/* --password $PYPI_API_TOKEN
+> # You may skip following:
+> poetry export -f requirements.txt > requirements.txt
+
+> python3 -m venv .venv
+> source ./.venv/bin/activate
+> python3 -m pip install -r requirements.txt
+> python3 -m example
 ```
