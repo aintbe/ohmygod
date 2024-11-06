@@ -1,4 +1,4 @@
-name: Publich PyPI Package
+name: Publish PyPI Package
 on:
   push:
     tags:
