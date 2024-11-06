@@ -1,4 +1,5 @@
-from ohmygod import OhMyGod, Buddha
+from ohmygod import OhMyGod
+from ohmygod.messenger import Buddha
 import time
 
 omg = OhMyGod(Buddha)

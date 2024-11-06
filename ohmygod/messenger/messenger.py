@@ -5,7 +5,7 @@ from typing import List
 from ..utils import _Message
 
 
-class _Messenger(ABC):
+class Messenger(ABC):
     @property
     @abstractmethod
     def BLESSING(self) -> _Message:

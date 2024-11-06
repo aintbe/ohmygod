@@ -1,8 +1,9 @@
 [tool.poetry]
 name = "ohmygod"
-version = "0.2.0"
+version = "0.2.1"
 description = "Rich CLI tool powered by gods"
-authors = ["Sori Lim <sori@chartmetric.com>"]
+authors = ["Sori Lim <aint.imsorry@gmail.com>"]
+homepage = "https://github.com/aintbe/ohmygod"
 license = "MIT"
 readme = "README.md"
 

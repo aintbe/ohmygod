@@ -7,14 +7,14 @@ import time
 from queue import Queue
 
 from .messenger.buddha import Buddha
-from .messenger.messenger import _Messenger as Messenger
+from .messenger.messenger import Messenger
 
 
 class OhMyGod(Console):
-    """Console interface powered by Buddha"""
-    def __init__(self, messenger_cls: type[Messenger] = Buddha):
+    """Console interface powered by gods and rich library"""
+    def __init__(self, messenger: type[Messenger] = Buddha):
         super().__init__()
-        self.messenger = messenger_cls()
+        self.messenger = messenger()
         self.bless()
 
 

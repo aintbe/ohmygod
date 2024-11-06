@@ -1,6 +1,6 @@
 from rich.text import Text
 
-from .messenger import _Messenger
+from .messenger import Messenger
 from ..utils import Color, _Message
 
 
@@ -73,7 +73,7 @@ _ERROR_ANIMATION = _Message.from_str("""ALL within the palm of my hand
 _ERROR = _ERROR_TEMPLATE.clean() + _ERROR_ANIMATION
 
 
-class Buddha(_Messenger):
+class Buddha(Messenger):
     @property
     def BLESSING(self):
         return _BLESSING
@@ -94,7 +94,7 @@ class Buddha(_Messenger):
     def ERROR_ANIMATION(self):
         return _ERROR_ANIMATION
     
-    class Quotes(_Messenger.Quotes):
+    class Quotes(Messenger.Quotes):
         @property
         def BLESSING(self):
             return Text(_BLESSING)
