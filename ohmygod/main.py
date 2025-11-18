@@ -37,16 +37,16 @@ class OhMyGod(Console):
         queue = Queue()
 
         def pray():
-            with Live(auto_refresh=False, console=self) as live:
-                state = 0
-                while not signal.is_set():
-                    prayer = Text(self.messenger.PRAYER_ANIMATED[state % 2])
-                    dots = "." * (state % 4)
+            prayer = self.messenger.PRAYER_LIVE
 
-                    live.update(prayer + message + dots)
+            with Live(auto_refresh=False, console=self) as live:
+                dot_count = 0
+                while not signal.is_set():
+                    prayer_text = Text(prayer.next())
+                    dots = "." * (dot_count % 4)
+                    live.update(prayer_text + message + dots)
                     live.refresh()
-                    time.sleep(0.5)
-                    state += 1
+                    dot_count += 1
         
         def decorator(func):
             def run_func(*args, **kwargs):
@@ -77,20 +77,20 @@ class OhMyGod(Console):
 
     def success(self, message: str = ""):
         """Print a success message to the screen"""
+        hurray = self.messenger.HURRAY_LIVE
+
         with Live(auto_refresh=False, console=self) as live:
-            for i in range(3):
-                live.update(Text(self.messenger.HURRAY_ANIMATED[i % 2] + message))
+            for i in range(len(hurray.frames)):
+                live.update(Text(hurray.next() + message))
                 live.refresh()
-                if i < 2:
-                    time.sleep(0.4 + 0.3 * i)
-    
+
 
     def error(self, message: str = ""):
         """Print an error message to the screen"""
-        self.print(Text(self.messenger.ERROR_COLORED), end="")
+        self.print(Text(self.messenger.ERROR), end="")
 
         # Print characters in the error message one by one
-        for char in self.messenger.ERROR_ANIMATION:
+        for char in self.messenger.ERROR_FOCUS:
             self.print(Text(char, style="red"), end="")
             time.sleep(0.1)
 

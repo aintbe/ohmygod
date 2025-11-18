@@ -1,7 +1,7 @@
 from rich.text import Text
 
 from .messenger import Messenger
-from ..utils import Color, _Message
+from ..utils import _Animation, _Frame, Color, _Message
 
 
 _BLESSING = _Message.from_str(r"""
@@ -26,7 +26,7 @@ __    `--.__    `--._  `-._ `-. `. {1}\:/{0} .' .-' _.-'  _.--'    __.--'    __
   `--..__   `--.__   `--._ `-._`-{1}.`{0}_=_{1}'.{0}-'_.-' _.--'   __.--'   __..--'
 --..__   `--..__  `--.__  `--.{1}_`-{0}q(-_-)p{1}-'_{0}.--'  __.--'  __..--'   __..--
       ``--..__  `--..__ `--.__ `{1}-'{0}_) (_{1}`-{0}' __.--' __..--'  __..--''
-...___        ``--..__ `--..__{1}`--{0}{2}{1}--'{0}__..--' __..--''        ___...
+...___        ``--..__ `--..__{1}`--{0}{arms}{1}--'{0}__..--' __..--''        ___...
       ```---...__     ``--..{1}__`{0}_(<_   _/)_{1}'__{0}..--''    ___...---'''
 ```-----....._____```---..._{1}__{0}(__\_\_|_/__){1}__{0}_...---'''_____.....-----'''
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^{1}^^^^^^^^^^^^^^^{0}^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -34,8 +34,8 @@ __    `--.__    `--._  `-._ `-. `. {1}\:/{0} .' .-' _.-'  _.--'    __.--'    __
 
 """)
 _PRAYER_COLORED_TEMPLATE = _PRAYER_TEMPLATE.color(Color.YELLOW)
-_PRAYER_ANIMATED = _PRAYER_COLORED_TEMPLATE.animate(["/___||_)", "(_||___\\"])
-_PRAYER = _PRAYER_TEMPLATE.animate(["/__|__\\"])[0].clean()
+_PRAYER_LIVE = _PRAYER_COLORED_TEMPLATE.animate([{"arms": "/___||_)"}, {"arms": "(_||___\\"}])
+_PRAYER = _PRAYER_TEMPLATE.format(arms="/__|__\\").clean()
 
 
 _HURRAY_TEMPLATE = _Message.from_str(r"""
@@ -43,7 +43,7 @@ _HURRAY_TEMPLATE = _Message.from_str(r"""
 `--.__     `--._   `-._  `-.  `. `. : .' .'  .-'  _.-'   _.--'     __.--'
 __    `--.__    `--._  `-._ `-. `. \:/ .' .-' _.-'  _.--'    __.--'    __
   `--..__   `--.__   `--._ `-._`-.`_=_'.-'_.-' _.--'   __.--'   __..--'
---..__   `--..__  `--.__  `--._`-q(•u{2}-'_.--'  __.--'  __..--'   __..--
+--..__   `--..__  `--.__  `--._`-q(•u{wink}-'_.--'  __.--'  __..--'   __..--
       ``--..__  `--..__ `--.__ `-'_) (_`-' __.--' __..--'  __..--''
 ...___        ``--..__ `--..__`--/__/  \--'__..--' __..--''        ___...
       ```---...___    ``--..__`_(<_   _/)_'__..--''    ___...---'''
@@ -52,8 +52,12 @@ __    `--.__    `--._  `-._ `-. `. \:/ .' .-' _.-'  _.--'    __.--'    __
                   May no obstacle come across your way
 
 """)
-_HURRAY_ANIMATED = _HURRAY_TEMPLATE.animate(["•)p", _Message.from_str("-){1}⟡{0}").color(Color.CYAN)])
-_HURRAY = _HURRAY_ANIMATED[0]
+_HURRAY_LIVE = _Animation([
+    _Frame(_HURRAY_TEMPLATE.format(wink="•)p"), 0.4),
+	_Frame(_HURRAY_TEMPLATE.format(wink=_Message.from_str("-){1}⟡{0}").color(Color.CYAN)), 0.7),
+    _Frame(_HURRAY_TEMPLATE.format(wink="•)p"), 0),
+])
+_HURRAY = _HURRAY_LIVE.get_clean_message(0)
 
 _ERROR_TEMPLATE = _Message.from_str(r"""{1}
       `--._    `-._   `-.   `.  \   :   /  .'   .-'   _.-'    _.--'
@@ -79,19 +83,19 @@ class Buddha(Messenger):
         return _BLESSING
     
     @property
-    def PRAYER_ANIMATED(self):
-        return _PRAYER_ANIMATED
+    def PRAYER_LIVE(self):
+        return _PRAYER_LIVE.activate()
     
     @property
-    def HURRAY_ANIMATED(self):
-        return _HURRAY_ANIMATED
+    def HURRAY_LIVE(self):
+        return _HURRAY_LIVE.activate()
     
     @property
-    def ERROR_COLORED(self):
+    def ERROR(self):
         return _ERROR_COLORED
     
     @property
-    def ERROR_ANIMATION(self):
+    def ERROR_FOCUS(self):
         return _ERROR_ANIMATION
     
     class Quotes(Messenger.Quotes):

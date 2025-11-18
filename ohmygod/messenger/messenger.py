@@ -1,8 +1,7 @@
 from abc import ABC, abstractmethod
 from rich.text import Text
-from typing import List
 
-from ..utils import _Message
+from ..utils import _Message, _LiveContext
 
 
 class Messenger(ABC):
@@ -13,22 +12,22 @@ class Messenger(ABC):
 
     @property
     @abstractmethod
-    def PRAYER_ANIMATED(self) -> List[_Message]:
+    def PRAYER_LIVE(self) -> _LiveContext:
         pass
 
     @property
     @abstractmethod
-    def HURRAY_ANIMATED(self) -> List[_Message]:
+    def HURRAY_LIVE(self) -> _LiveContext:
         pass
 
     @property
     @abstractmethod
-    def ERROR_COLORED(self) -> _Message:
+    def ERROR(self) -> _Message:
         pass
 
     @property
     @abstractmethod
-    def ERROR_ANIMATION(self) -> _Message:
+    def ERROR_FOCUS(self) -> _Message:
         pass
 
     @property
